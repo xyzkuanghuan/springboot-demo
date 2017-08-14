@@ -11,6 +11,10 @@ import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
+import com.alibaba.fastjson.parser.Feature;
+import com.alibaba.fastjson.serializer.SerializerFeature;
+import com.alibaba.fastjson.support.config.FastJsonConfig;
+import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
 import com.xyz.spring.boot.interceptor.AuthenticationInterceptor;
 import com.xyz.spring.boot.interceptor.AuthorizationInterceptor;
 
@@ -38,9 +42,27 @@ public class WebMvcConfiguration extends WebMvcConfigurerAdapter {
 		List<MediaType> supportedMediaTypes = new ArrayList<MediaType>();
 		supportedMediaTypes.add(MediaType.TEXT_PLAIN);
 		stringHttpMessageConverter.setSupportedMediaTypes(supportedMediaTypes);
+		converters.add(stringHttpMessageConverter);
 		
-		// TODO Auto-generated method stub
+		FastJsonHttpMessageConverter fastJsonHttpMessageConverter = new FastJsonHttpMessageConverter();
+		supportedMediaTypes = new ArrayList<MediaType>();
+		supportedMediaTypes.add(MediaType.TEXT_PLAIN);
+		supportedMediaTypes.add(MediaType.APPLICATION_JSON);
+		fastJsonHttpMessageConverter.setSupportedMediaTypes(supportedMediaTypes);
+		FastJsonConfig fastJsonConfig = new FastJsonConfig();
+		fastJsonConfig.setFeatures(Feature.AllowArbitraryCommas, Feature.AllowUnQuotedFieldNames, Feature.DisableCircularReferenceDetect);
+		fastJsonConfig.setSerializerFeatures(SerializerFeature.WriteMapNullValue, SerializerFeature.WriteNullListAsEmpty);
+		fastJsonHttpMessageConverter.setFastJsonConfig(fastJsonConfig);
+		converters.add(fastJsonHttpMessageConverter);
+		
 		super.configureMessageConverters(converters);
 	}
+	
+	@Override
+    public void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
+        for (HttpMessageConverter<?> messageConverter : converters) {
+            System.out.println(messageConverter);
+        }
+    }
 	
 }
