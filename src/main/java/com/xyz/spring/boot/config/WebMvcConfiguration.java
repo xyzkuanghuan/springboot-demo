@@ -1,4 +1,4 @@
-package com.alog.spring.boot.config;
+package com.xyz.spring.boot.config;
 
 import java.nio.charset.Charset;
 import java.util.ArrayList;
@@ -11,8 +11,8 @@ import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
-import com.alog.spring.boot.controller.AuthenticationInterceptor;
-import com.alog.spring.boot.controller.AuthorizationInterceptor;
+import com.xyz.spring.boot.interceptor.AuthenticationInterceptor;
+import com.xyz.spring.boot.interceptor.AuthorizationInterceptor;
 
 @Configuration
 public class WebMvcConfiguration extends WebMvcConfigurerAdapter {

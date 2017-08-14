@@ -1,4 +1,4 @@
-package com.alog.spring.boot.controller;
+package com.xyz.spring.boot.interceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

@@ -1,4 +1,4 @@
-package com.alog.spring.boot.demo;
+package com.xyz.spring.boot.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
